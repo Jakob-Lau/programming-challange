@@ -1,5 +1,6 @@
 package de.bcxp.challenge;
 
+import de.bcxp.challenge.countries.CountryAnalysis;
 import de.bcxp.challenge.weather.WeatherAnalysis;
 
 import java.io.IOException;
@@ -20,14 +21,16 @@ public final class App {
         final Path weatherPath = Paths.get("src/main/resources/de/bcxp/challenge/weather.csv");
         WeatherAnalysis weatherAnalysis = new WeatherAnalysis(weatherPath, ',');
 
-        // Your preparation code …
+        final Path countriesPath = Paths.get("src/main/resources/de/bcxp/challenge/countries.csv");
+        CountryAnalysis countryAnalysis = new CountryAnalysis(countriesPath, ';');
+
 
         // Your preparation code
 
         int dayWithSmallestTempSpread = weatherAnalysis.calcSmallestTempSpread().day;
         System.out.printf("Day with smallest temperature spread: %d%n", dayWithSmallestTempSpread);
 
-        String countryWithHighestPopulationDensity = "Some country"; // Your population density analysis function call …
+        String countryWithHighestPopulationDensity = countryAnalysis.getHighestPopulationDensityCountry().getName(); // Your population density analysis function call …
         System.out.printf("Country with highest population density: %s%n", countryWithHighestPopulationDensity);
     }
 }

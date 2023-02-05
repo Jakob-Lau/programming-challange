@@ -3,6 +3,7 @@ package de.bcxp.challenge;
 import de.bcxp.challenge.countries.CountryAnalysis;
 import de.bcxp.challenge.weather.WeatherAnalysis;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,19 +19,22 @@ public final class App {
      * @param args The CLI arguments passed
      */
     public static void main(String... args) throws IOException {
-        final Path weatherPath = Paths.get("src/main/resources/de/bcxp/challenge/weather.csv");
+        // create weather analysis
+        String[] weatherPathArray = {"src", "main", "resources", "de", "bcxp", "challenge", "weather.csv"};
+        final Path weatherPath = Paths.get(String.join(File.separator, weatherPathArray));
         WeatherAnalysis weatherAnalysis = new WeatherAnalysis(weatherPath, ',');
 
-        final Path countriesPath = Paths.get("src/main/resources/de/bcxp/challenge/countries.csv");
+        // create countries analysis
+        String[] countriesPathArray = {"src", "main", "resources", "de", "bcxp", "challenge", "countries.csv"};
+        final Path countriesPath = Paths.get(String.join(File.separator, countriesPathArray));
         CountryAnalysis countryAnalysis = new CountryAnalysis(countriesPath, ';');
 
 
-        // Your preparation code
-
+        // analysis calls
         int dayWithSmallestTempSpread = weatherAnalysis.calcSmallestTempSpread().day;
         System.out.printf("Day with smallest temperature spread: %d%n", dayWithSmallestTempSpread);
 
-        String countryWithHighestPopulationDensity = countryAnalysis.getHighestPopulationDensityCountry().getName(); // Your population density analysis function call …
+        String countryWithHighestPopulationDensity = countryAnalysis.getHighestPopulationDensityCountry().getName();
         System.out.printf("Country with highest population density: %s%n", countryWithHighestPopulationDensity);
     }
 }

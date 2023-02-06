@@ -17,10 +17,8 @@ public class CountryAnalysis {
     }
 
     public Country getHighestPopulationDensityCountry() {
-        CountryPopulationDensityComparator comparator = new CountryPopulationDensityComparator();
-        List<Country> copy = new java.util.ArrayList<>(List.copyOf(this.data));
-        copy.sort(comparator);
-        return copy.get(copy.size() - 1);
+        CountryPopulationDensityComparator countryComparator = new CountryPopulationDensityComparator();
+        return this.data.stream().max(countryComparator).get();
     }
 
     private void readData(Path path, char separator) throws IOException {
